@@ -1,6 +1,6 @@
 ﻿namespace Parser.States
 {
-	public class KeyValueState
+	public abstract class KeyValueState
 	{
 		protected string GetKey(string line)
 		{
