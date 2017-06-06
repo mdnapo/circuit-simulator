@@ -7,13 +7,13 @@ using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public class OutputNode : NodeV2
+	public class OutputNode : Node
 	{
-		public OutputNode(string key) : base(key)
+		public OutputNode(string key, string type) : base(key, type)
 		{
 		}
 
-		public override void Process(NodeV2 triggerSource)
+		public override void Process(Node triggerSource)
 		{
 			base.Process(triggerSource);
 			Value = Inputs.First().Value;

@@ -7,27 +7,27 @@ using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public class CircuitV2
+	public class Circuit
 	{
 		public ICollection<InputNode> Inputs { get; set; }
-		public ICollection<NodeV2> Operators { get; set; }
+		public ICollection<Node> Operators { get; set; }
 		public ICollection<OutputNode> Outputs { get; set; }
 
-		public CircuitV2()
+		public Circuit()
 		{
 			Inputs = new List<InputNode>();
-			Operators = new List<NodeV2>();
+			Operators = new List<Node>();
 			Outputs = new List<OutputNode>();
 		}
 
-		public void SetSimulationContext(ISimulationContext context)
+		public void SetTextView(ITextView context)
 		{
 			((List<InputNode>)Inputs).
-				ForEach(input => input.SetSimulationContext(context));
-			((List<NodeV2>)Operators).
-				ForEach(operators => operators.SetSimulationContext(context));
+				ForEach(input => input.SetTextView(context));
+			((List<Node>)Operators).
+				ForEach(operators => operators.SetTextView(context));
 			((List<OutputNode>)Outputs).
-				ForEach(output => output.SetSimulationContext(context));
+				ForEach(output => output.SetTextView(context));
 		}
 
 		public void Process()

@@ -42,12 +42,12 @@
   <ItemGroup>
     <Compile Include="Builders\CircuitBuilderV2.cs" />
     <Compile Include="Builders\CircuitBuilder.cs" />
-    <Compile Include="Contracts\ISimulationContext.cs" />
+    <Compile Include="Contracts\ITextView.cs" />
     <Compile Include="Factories\NodeFactoryV2.cs" />
     <Compile Include="Models\V2\AndNode.cs" />
-    <Compile Include="Models\V2\CircuitV2.cs" />
+    <Compile Include="Models\V2\Circuit.cs" />
     <Compile Include="Models\V2\InputNode.cs" />
-    <Compile Include="Models\V2\NodeV2.cs" />
+    <Compile Include="Models\V2\Node.cs" />
     <Compile Include="Models\V2\NotNode.cs" />
     <Compile Include="Models\V2\OrNode.cs" />
     <Compile Include="Models\V2\OutputNode.cs" />

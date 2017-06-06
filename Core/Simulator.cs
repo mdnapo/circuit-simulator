@@ -8,10 +8,10 @@ using Core.Models.V2;
 
 namespace Core
 {
-    public class Simulator : ISimulationContext
+    public class Simulator : ITextView
     {
 		private List<String> _results;
-		//private CircuitV2 _circuit;
+		public Circuit Circuit { private get; set; }
 
 		public Simulator()
 		{

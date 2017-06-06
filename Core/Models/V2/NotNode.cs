@@ -7,13 +7,13 @@ using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public class NotNode : NodeV2
+	public class NotNode : Node
 	{
-		public NotNode(string key) : base(key)
+		public NotNode(string key, string type) : base(key, type)
 		{
 		}
 
-		public override void Process(NodeV2 triggerSource)
+		public override void Process(Node triggerSource)
 		{
 			base.Process(triggerSource);
 

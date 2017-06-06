@@ -7,14 +7,14 @@ using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public class OrNode : NodeV2
+	public class OrNode : Node
 	{
-		public OrNode(string key) : base(key)
+		public OrNode(string key, string type) : base(key, type)
 		{
 
 		}
 
-		public override void Process(NodeV2 triggerSource)
+		public override void Process(Node triggerSource)
 		{
 			base.Process(triggerSource);
 

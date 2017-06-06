@@ -12,8 +12,8 @@ namespace Core.Builders
 	public class CircuitBuilderV2
 	{
 		private NodeFactoryV2 _nodeFactory;
-		private CircuitV2 _circuit;
-		private IDictionary<string, NodeV2> _nodes;
+		private Circuit _circuit;
+		private IDictionary<string, Node> _nodes;
 
 		public CircuitBuilderV2()
 		{
@@ -41,8 +41,8 @@ namespace Core.Builders
 
 		public void AddEdge(string source, string[] targets)
 		{
-			NodeV2 _source = _nodes[source];
-			NodeV2 _target;
+			Node _source = _nodes[source];
+			Node _target;
 
 			foreach (string target in targets)
 			{
@@ -52,10 +52,10 @@ namespace Core.Builders
 			}
 		}
 
-		public CircuitV2 GetCircuit(ICircuitDescription description)
+		public Circuit GetCircuit(ICircuitDescription description)
 		{
-			_circuit = new CircuitV2();
-			_nodes = new Dictionary<string, NodeV2>();
+			_circuit = new Circuit();
+			_nodes = new Dictionary<string, Node>();
 
 			foreach (string key in description.Nodes.Keys)
 			{

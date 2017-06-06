@@ -1,41 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public abstract class NodeV2
+	public abstract class Node
 	{
 		public string Key { get; private set; }
+		public string Type { get; private set; }
 		public bool Processed { get; set; }
-		public ICollection<NodeV2> Inputs { get; set; }
-		public ICollection<NodeV2> Outputs { get; set; }
+		public ICollection<Node> Inputs { get; set; }
+		public ICollection<Node> Outputs { get; set; }
 		public int Value { get; set; }
 
-		private ISimulationContext _context;
+		private ITextView _context;
 
-		public NodeV2(string key)
+		public Node(string key, string type)
 		{
 			Key = key;
+			Type = type;
 			Processed = false;
-			Inputs = new List<NodeV2>();
-			Outputs = new List<NodeV2>();
+			Inputs = new List<Node>();
+			Outputs = new List<Node>();
 		}
 
-		public void AddInputNode(NodeV2 node)
+		public void AddInputNode(Node node)
 		{
 			Inputs.Add(node);
 		}
 
-		public void AddOutputNode(NodeV2 node)
+		public void AddOutputNode(Node node)
 		{
 			Outputs.Add(node);
 		}
 
-		public void SetSimulationContext(ISimulationContext context)
+		public void SetTextView(ITextView context)
 		{
 			_context = context;
 		}
@@ -44,7 +43,7 @@ namespace Core.Models.V2
 		{
 			int processed = 0;
 
-			foreach (NodeV2 node in Inputs)
+			foreach (Node node in Inputs)
 			{
 				if (node.Processed)
 				{
@@ -55,7 +54,7 @@ namespace Core.Models.V2
 			return processed == Inputs.Count;
 		}
 
-		public virtual void Process(NodeV2 triggerSource)
+		public virtual void Process(Node triggerSource)
 		{
 			if (Processed)
 			{
@@ -65,14 +64,14 @@ namespace Core.Models.V2
 			Processed = true;
 		}
 
-		private string ToProcessingResult(NodeV2 triggerSource)
+		private string ToProcessingResult(Node triggerSource)
 		{
 			return this is OutputNode ?
-				triggerSource.Key + " -> " + triggerSource.Value + " -> " + Key + " -> " + triggerSource.Value :
-				triggerSource.Key + " -> " + triggerSource.Value + " -> " + Key;
+				$"{triggerSource.Type} ({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key}) -> {triggerSource.Value}" :
+				$"{triggerSource.Type} ({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key})";
 		}
 
-		protected virtual void ProcessInput(NodeV2 triggerSource)
+		protected virtual void ProcessInput(Node triggerSource)
 		{
 			_context.AddProcessingResult(ToProcessingResult(triggerSource));
 			if (CanProcess())
@@ -83,7 +82,7 @@ namespace Core.Models.V2
 
 		protected void TriggerOutputs()
 		{
-			foreach (NodeV2 output in Outputs)
+			foreach (Node output in Outputs)
 			{
 				output.ProcessInput(this);
 			}

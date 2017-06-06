@@ -7,14 +7,14 @@ using Core.Contracts;
 
 namespace Core.Models.V2
 {
-	public class AndNode : NodeV2
+	public class AndNode : Node
 	{
-		public AndNode(string key) : base(key)
+		public AndNode(string key, string type) : base(key, type)
 		{
 
 		}
 
-		public override void Process(NodeV2 triggerSource)
+		public override void Process(Node triggerSource)
 		{
 			base.Process(triggerSource);
 

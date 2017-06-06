@@ -17,11 +17,11 @@ namespace BuilderTest
 		{
 			IParser parser = new FileParser();
 			ICircuitDescription description = parser.Parse();
-			ISimulationContext context = new Simulator();
+			ITextView context = new Simulator();
 
 			CircuitBuilderV2 builder = new CircuitBuilderV2();
 			var c = builder.GetCircuit(description);
-			c.SetSimulationContext(context);
+			c.SetTextView(context);
 			c.Process();
 
 			//foreach (NodeV2 node in c.Inputs)

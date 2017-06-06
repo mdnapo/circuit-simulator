@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Contracts
 {
-	public interface ISimulationContext
+	public interface ITextView
 	{
 		void AddProcessingResult(string result);
 		string[] GetProcessingResults();
