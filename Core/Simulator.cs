@@ -1,31 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Contracts;
+﻿using Core.Output;
 using Core.Models.V2;
 
 namespace Core
 {
-    public class Simulator : ITextView
-    {
-		private List<String> _results;
-		public Circuit Circuit { private get; set; }
+	public class Simulator
+	{
+		public ITextOutput Output { get; set; }
+
+		private Circuit _circuit;
+		public Circuit Circuit
+		{
+			get { return _circuit; }
+			set
+			{
+				_circuit = value;
+				_circuit.SetOutput(Output);
+			}
+		}
 
 		public Simulator()
 		{
-			_results = new List<string>();
+			_circuit = new Circuit();
+			Output = new TextOutput();
 		}
 
-		public void AddProcessingResult(string result)
+		public void Run()
 		{
-			_results.Add(result);
+			_circuit.Reset();
+			Output.Reset();
+			_circuit.Process();
 		}
-
-		public string[] GetProcessingResults()
-		{
-			return _results.ToArray();
-		}
-    }
+	}
 }
