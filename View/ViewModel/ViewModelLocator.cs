@@ -27,13 +27,13 @@ namespace View.ViewModel
 		static ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-			SimpleIoc.Default.Register<CircuitViewModel>();
+			//SimpleIoc.Default.Register<CircuitViewModel>();
 		}
 
-		public CircuitViewModel CircuitViewModel
-		{
-			get { return ServiceLocator.Current.GetInstance<CircuitViewModel>(); }
-		}
+		//public CircuitViewModel CircuitViewModel
+		//{
+		//	get { return ServiceLocator.Current.GetInstance<CircuitViewModel>(); }
+		//}
 
 		/// <summary>
 		/// Cleans up all the resources.
