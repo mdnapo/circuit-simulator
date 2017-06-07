@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Contracts;
+using Core.Output;
 
 namespace Core.Models.V2
 {
@@ -20,21 +20,31 @@ namespace Core.Models.V2
 			Outputs = new List<OutputNode>();
 		}
 
-		public void SetTextView(ITextView context)
+		public void SetOutput(ITextOutput _output)
 		{
 			((List<InputNode>)Inputs).
-				ForEach(input => input.SetTextView(context));
+				ForEach(input => input.SetTextOutput(_output));
 			((List<Node>)Operators).
-				ForEach(operators => operators.SetTextView(context));
+				ForEach(operators => operators.SetTextOutput(_output));
 			((List<OutputNode>)Outputs).
-				ForEach(output => output.SetTextView(context));
+				ForEach(output => output.SetTextOutput(_output));
+		}
+
+		public void Reset()
+		{
+			((List<InputNode>)Inputs).
+				ForEach(input => input.Processed = false);
+			((List<Node>)Operators).
+				ForEach(operators => operators.Processed = false);
+			((List<OutputNode>)Outputs).
+				ForEach(output => output.Processed = false);
 		}
 
 		public void Process()
 		{
 			foreach (var input in Inputs)
 			{
-				input.Process(input);
+				input.Process();
 			}
 		}
 	}

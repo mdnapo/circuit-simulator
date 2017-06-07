@@ -6,8 +6,8 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Height="300"
-        Width="300"
-        Title="MVVM Light Application"
+        Width="500"
+        Title="Circuit Simulator"
 		ResizeMode="NoResize"
         DataContext="{Binding SimulationVM, Source={StaticResource Locator}}">
 
@@ -19,20 +19,68 @@
 	</Window.Resources>
 
 	<Grid x:Name="LayoutRoot">
+		<!--The grid definition-->
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="3*"/>
+			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
 			<RowDefinition Height="30"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Button Click="btnOpenFile_Click"  Grid.Column="0" Grid.Row="0">Select circuit</Button>
-		<Button Grid.Column="1" Grid.Row="0">Simulate</Button>
-		<Button Grid.Column="2" Grid.Row="0">Clear</Button>
-		<TextBlock Text="{Binding TestProp}" Name="view" Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap">
-		</TextBlock>
+		<!--The button panel-->
+		<Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Button Command="{Binding SelectCircuit}" Grid.Column="0">
+				Select circuit
+			</Button>
+			<Button Command="{Binding RunSimulation}" Grid.Column="1">
+				Run simulation
+			</Button>
+		</Grid>
+
+		<!--The notifications panel-->
+		<TextBlock Text="{Binding Notification}" Grid.Row="1" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center"/>
+
+		<!--The circuit inputs panel-->
+		<StackPanel Grid.Column="0" Grid.Row="2">
+			<TextBlock TextAlignment="Center">Inputs</TextBlock>
+			<ItemsControl ItemsSource="{Binding Simulator.Circuit.Inputs}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<TextBlock Text="{Binding Key}"/>
+							<TextBox Text="{Binding Value}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
+
+		<!--The simulation output panel-->
+		<ScrollViewer Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1">
+			<TextBlock Text="{Binding Simulator.Output.Get}" Name="view"  TextWrapping="Wrap"/>
+		</ScrollViewer>
+
+		<!--The circuit outputs-->
+		<StackPanel Grid.Column="2" Grid.Row="2">
+			<TextBlock TextAlignment="Center">Outputs</TextBlock>
+			<ItemsControl ItemsSource="{Binding Simulator.Circuit.Outputs}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<TextBlock Text="{Binding Key}"/>
+							<TextBox IsEnabled="False" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
 	</Grid>
 </Window>

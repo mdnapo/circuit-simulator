@@ -19,11 +19,11 @@ namespace View
 			Closing += (s, e) => ViewModelLocator.Cleanup();
 		}
 
-		private void btnOpenFile_Click(object sender, RoutedEventArgs e)
-		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			if (openFileDialog.ShowDialog() == true)
-				view.Text = File.ReadAllText(openFileDialog.FileName);
-		}
+		//private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+		//{
+		//	OpenFileDialog openFileDialog = new OpenFileDialog();
+		//	if (openFileDialog.ShowDialog() == true)
+		//		view.Text = File.ReadAllText(openFileDialog.FileName);
+		//}
 	}
 }

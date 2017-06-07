@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Contracts;
+using Core.Output;
 
 namespace Core.Models.V2
 {
@@ -14,9 +14,9 @@ namespace Core.Models.V2
 			Value = value;
 		}
 
-		public override void Process(Node triggerSource = null)
+		public override void Process()
 		{
-			base.Process(this);
+			base.Process();
 			TriggerOutputs();
 		}
 	}

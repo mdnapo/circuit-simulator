@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Contracts;
+using System.ComponentModel;
+using Core.Output;
 
 namespace Core.Models.V2
 {
@@ -11,9 +12,15 @@ namespace Core.Models.V2
 		public bool Processed { get; set; }
 		public ICollection<Node> Inputs { get; set; }
 		public ICollection<Node> Outputs { get; set; }
-		public int Value { get; set; }
 
-		private ITextView _context;
+		private int _value;
+		public int Value
+		{
+			get { return _value; }
+			set { _value = SetValue(value); }
+		}
+
+		private ITextOutput _output;
 
 		public Node(string key, string type)
 		{
@@ -34,9 +41,9 @@ namespace Core.Models.V2
 			Outputs.Add(node);
 		}
 
-		public void SetTextView(ITextView context)
+		public void SetTextOutput(ITextOutput output)
 		{
-			_context = context;
+			_output = output;
 		}
 
 		public bool CanProcess()
@@ -54,29 +61,24 @@ namespace Core.Models.V2
 			return processed == Inputs.Count;
 		}
 
-		public virtual void Process(Node triggerSource)
+		public virtual void Process()
 		{
-			if (Processed)
-			{
-				throw new Exception("There is an inifinite loop.");
-			}
-
 			Processed = true;
 		}
 
-		private string ToProcessingResult(Node triggerSource)
+		private string ToTextOutput(Node triggerSource)
 		{
 			return this is OutputNode ?
-				$"{triggerSource.Type} ({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key}) -> {triggerSource.Value}" :
-				$"{triggerSource.Type} ({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key})";
+				$"({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key}) -> {triggerSource.Value}" :
+				$"({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key})";
 		}
 
 		protected virtual void ProcessInput(Node triggerSource)
 		{
-			_context.AddProcessingResult(ToProcessingResult(triggerSource));
+			_output.Add(ToTextOutput(triggerSource));
 			if (CanProcess())
 			{
-				Process(triggerSource);
+				Process();
 			}
 		}
 
@@ -86,6 +88,11 @@ namespace Core.Models.V2
 			{
 				output.ProcessInput(this);
 			}
+		}
+
+		protected int SetValue(int value)
+		{
+			return value == 0 ? 0 : 1;
 		}
 	}
 }

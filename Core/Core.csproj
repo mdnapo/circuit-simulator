@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Builders\CircuitBuilderV2.cs" />
     <Compile Include="Builders\CircuitBuilder.cs" />
-    <Compile Include="Contracts\ITextView.cs" />
     <Compile Include="Factories\NodeFactoryV2.cs" />
     <Compile Include="Models\V2\AndNode.cs" />
     <Compile Include="Models\V2\Circuit.cs" />
@@ -51,6 +50,8 @@
     <Compile Include="Models\V2\NotNode.cs" />
     <Compile Include="Models\V2\OrNode.cs" />
     <Compile Include="Models\V2\OutputNode.cs" />
+    <Compile Include="Output\ITextOutput.cs" />
+    <Compile Include="Output\TextOutput.cs" />
     <Compile Include="Simulator.cs" />
     <Compile Include="Factories\NodeFactory.cs" />
     <Compile Include="Models\AndNode.cs" />
