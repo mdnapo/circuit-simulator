@@ -26,7 +26,10 @@ namespace Core.Factories
                 case ("nand"):
                     node = new NandNode(key, type);
                     break;
-				case ("input_high"):
+                case ("xor"):
+                    node = new XorNode(key, type);
+                    break;
+                case ("input_high"):
 					node = new InputNode(key, type, 1);
 					break;
 				case ("input_low"):

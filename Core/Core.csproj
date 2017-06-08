@@ -51,6 +51,7 @@
     <Compile Include="Models\V2\NotNode.cs" />
     <Compile Include="Models\V2\OrNode.cs" />
     <Compile Include="Models\V2\OutputNode.cs" />
+    <Compile Include="Models\V2\XorNode.cs" />
     <Compile Include="Output\ITextOutput.cs" />
     <Compile Include="Output\TextOutput.cs" />
     <Compile Include="Simulator.cs" />

@@ -209,5 +209,57 @@ namespace UnitTest
 
             Assert.AreEqual(0, outputValue);
         }
+
+        [TestMethod]
+        public void XorNode_WithInputs0and0_ShouldReturn0()
+        {
+            Node xorNode = new XorNode("ab", "and");
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 0 });
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 0 });
+
+            xorNode.Process();
+            var outputValue = xorNode.Value;
+
+            Assert.AreEqual(0, outputValue);
+        }
+
+        [TestMethod]
+        public void XorNode_WithInputs1and1_ShouldReturn0()
+        {
+            Node xorNode = new XorNode("ab", "and");
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 1 });
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 1 });
+
+            xorNode.Process();
+            var outputValue = xorNode.Value;
+
+            Assert.AreEqual(0, outputValue);
+        }
+
+        [TestMethod]
+        public void XorNode_WithInputs0and1_ShouldReturn1()
+        {
+            Node xorNode = new XorNode("ab", "and");
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 0 });
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 1 });
+
+            xorNode.Process();
+            var outputValue = xorNode.Value;
+
+            Assert.AreEqual(1, outputValue);
+        }
+
+        [TestMethod]
+        public void XorNode_WithInputs1and0_ShouldReturn1()
+        {
+            Node xorNode = new XorNode("ab", "and");
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 1 });
+            xorNode.AddInputNode(new XorNode("ab", "and") { Value = 0 });
+
+            xorNode.Process();
+            var outputValue = xorNode.Value;
+
+            Assert.AreEqual(1, outputValue);
+        }
     }
 }

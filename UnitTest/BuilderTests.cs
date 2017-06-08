@@ -70,7 +70,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void CircuitBuilder_addEdge_NodeShouldHaveEdge()
+        public void CircuitBuilder_addEdges_NodeShouldHaveEdge()
         {
             var builder = new CircuitBuilderV2();
 
@@ -87,6 +87,22 @@ namespace UnitTest
             Assert.AreEqual("NODE2", node.Outputs.ElementAt(0).Key);
             Assert.AreEqual("NODE3", node.Outputs.ElementAt(1).Key);
             Assert.AreEqual("NODE4", node.Outputs.ElementAt(2).Key);
+        }
+
+        [TestMethod]
+        public void CircuitBuilder_addEdge_NodeShouldHaveEdge()
+        {
+            var builder = new CircuitBuilderV2();
+
+            builder.AddNode("NODE1", "OR");
+            builder.AddNode("NODE2", "AND");
+
+            builder.AddEdge("NODE1", new string[] { "NODE2"});
+
+            var node = builder.GetCircuit().Operators.Where(n => n.Key == "NODE1").First();
+
+
+            Assert.AreEqual("NODE2", node.Outputs.ElementAt(0).Key);
         }
     }
 }
