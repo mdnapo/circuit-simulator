@@ -94,7 +94,10 @@ namespace Core.Models.V2
 		{
 			foreach (Node output in Outputs)
 			{
-				output.ProcessInput(this);
+                if (!output.Processed)
+                {
+                    output.ProcessInput(this);
+                }		
 			}
 		}
 
