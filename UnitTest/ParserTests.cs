@@ -6,10 +6,5 @@ namespace UnitTest
     [TestClass]
     public class ParserTests
     {
-        [TestMethod]
-        public void canparse()
-        {
-            Assert.AreEqual(true, true);
-        }
     }
 }

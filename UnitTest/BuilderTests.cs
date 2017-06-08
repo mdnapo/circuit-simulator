@@ -24,6 +24,56 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void NodeFactory_ShouldReturnXorNode()
+        {
+            var factory = new NodeFactoryV2();
+
+            var node = factory.Create("bla", "xor");
+
+            Assert.IsInstanceOfType(node, typeof(XorNode));
+        }
+
+        [TestMethod]
+        public void NodeFactory_ShouldReturnInputNode()
+        {
+            var factory = new NodeFactoryV2();
+
+            var node = factory.Create("bla", "input_high");
+
+            Assert.IsInstanceOfType(node, typeof(InputNode));
+        }
+
+        [TestMethod]
+        public void NodeFactory_ShouldReturnOutputNode()
+        {
+            var factory = new NodeFactoryV2();
+
+            var node = factory.Create("bla", "probe");
+
+            Assert.IsInstanceOfType(node, typeof(OutputNode));
+        }
+
+        [TestMethod]
+        public void NodeFactory_InvalidNode_ShouldReturnNull()
+        {
+            var factory = new NodeFactoryV2();
+
+            var node = factory.Create("bla", "basdasd");
+
+            Assert.AreEqual(null, node);
+        }
+
+        [TestMethod]
+        public void NodeFactory_InputLow_ShouldReturnInputNode()
+        {
+            var factory = new NodeFactoryV2();
+
+            var node = factory.Create("bla", "input_low");
+
+            Assert.IsInstanceOfType(node, typeof(InputNode));
+        }
+
+        [TestMethod]
         public void NodeFactory_ShouldReturnOrNode()
         {
             var factory = new NodeFactoryV2();
