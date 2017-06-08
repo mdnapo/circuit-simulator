@@ -24,5 +24,28 @@ namespace Core.Models.V2
 
 			TriggerOutputs();
 		}
-	}
+
+        override public bool CanProcess()
+        {
+            if (Processed)
+            {
+                return false;
+            }
+
+            bool canProcess = false;
+
+            foreach (Node node in Inputs)
+            { 
+                if (node.Processed)
+                {
+                    if (node.Value == 1)
+                    {
+                        canProcess = true;
+                    }
+                }
+            }
+
+            return base.CanProcess() || canProcess;
+        }
+    }
 }

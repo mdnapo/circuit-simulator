@@ -49,7 +49,7 @@ namespace Core.Models.V2
 			_output = output;
 		}
 
-		public bool CanProcess()
+		virtual public bool CanProcess()
 		{
 			if (Processed)
 			{

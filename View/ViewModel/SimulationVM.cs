@@ -40,7 +40,7 @@ namespace View.ViewModel
 				Notification = $"{FormatFileName(dialog.FileName)} selected.";
 				RaisePropertyChanged("Notification");
 				RunSimulation();
-			}
+            }
 		}
 
 		public void RunSimulation()
