@@ -17,7 +17,9 @@ namespace Core.Builders
 
 		public CircuitBuilderV2()
 		{
-			_nodeFactory = new NodeFactoryV2();
+            _circuit = new Circuit();
+            _nodes = new Dictionary<string, Node>();
+            _nodeFactory = new NodeFactoryV2();
 		}
 
 		public void AddNode(string key, string type)
@@ -69,5 +71,10 @@ namespace Core.Builders
 
 			return _circuit;
 		}
-	}
+
+        public Circuit GetCircuit()
+        {
+            return _circuit;
+        }
+    }
 }

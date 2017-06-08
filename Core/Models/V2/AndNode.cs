@@ -18,11 +18,26 @@ namespace Core.Models.V2
 		{
 			base.Process();
 
-			var a = Inputs.First().Value;
-			var b = Inputs.Last().Value;
-			Value = a == b ? a : 0;
 
-			TriggerOutputs();
+            var firstvalue = Inputs.First().Value;
+            var value = firstvalue;
+
+            //can process more than 2 inputs
+            for (int i = 1; i < Inputs.Count; i++)
+            {
+                if (!(firstvalue == Inputs.ElementAt(i).Value))
+                {
+                    value = 0;
+                    continue;
+                }
+            }
+            Value = value;
+
+            //var a = Inputs.First().Value;
+            //var b = Inputs.Last().Value;
+            //Value = a == b ? a : 0;
+
+            TriggerOutputs();
 		}
 	}
 }

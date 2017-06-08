@@ -46,6 +46,7 @@
     <Compile Include="Models\V2\AndNode.cs" />
     <Compile Include="Models\V2\Circuit.cs" />
     <Compile Include="Models\V2\InputNode.cs" />
+    <Compile Include="Models\V2\NandNode.cs" />
     <Compile Include="Models\V2\Node.cs" />
     <Compile Include="Models\V2\NotNode.cs" />
     <Compile Include="Models\V2\OrNode.cs" />

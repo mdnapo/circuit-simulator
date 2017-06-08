@@ -23,6 +23,9 @@ namespace Core.Factories
 				case ("or"):
 					node = new OrNode(key, type);
 					break;
+                case ("nand"):
+                    node = new NandNode(key, type);
+                    break;
 				case ("input_high"):
 					node = new InputNode(key, type, 1);
 					break;

@@ -47,7 +47,16 @@ namespace View.ViewModel
 		private void RunSimulationExecute()
 		{
 			Simulator.Run();
-			RaisePropertyChanged("Simulator");
+            var errorNotification = Simulator.IsCircuitValid();
+            if (errorNotification.Length == 0)
+            {
+                RaisePropertyChanged("Simulator");
+            }
+            else
+            {
+                Notification = errorNotification;
+                RaisePropertyChanged("Notification");
+            }
 		}
 
 		private string FormatFileName(string fileName)
