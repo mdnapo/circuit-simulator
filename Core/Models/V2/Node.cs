@@ -11,7 +11,7 @@ namespace Core.Models.V2
 		public string Type { get; private set; }
 		public bool Processed { get; set; }
 
-        public bool ProcessedMoreThanOnce { get; set; }
+		public bool ProcessedMoreThanOnce { get; set; }
 		public ICollection<Node> Inputs { get; set; }
 		public ICollection<Node> Outputs { get; set; }
 
@@ -29,7 +29,7 @@ namespace Core.Models.V2
 			Key = key;
 			Type = type;
 			Processed = false;
-            ProcessedMoreThanOnce = false;
+			ProcessedMoreThanOnce = false;
 			Inputs = new List<Node>();
 			Outputs = new List<Node>();
 		}
@@ -51,12 +51,12 @@ namespace Core.Models.V2
 
 		public bool CanProcess()
 		{
-            if (Processed)
-            {
-                return false;
-            }
+			if (Processed)
+			{
+				return false;
+			}
 
-            int processed = 0;
+			int processed = 0;
 
 			foreach (Node node in Inputs)
 			{
@@ -71,14 +71,12 @@ namespace Core.Models.V2
 
 		public virtual void Process()
 		{
-                Processed = true;	
+			Processed = true;
 		}
 
-		private string FormatTextOutput(Node inputSource)
+		protected virtual string FormatTextOutput(Node inputSource)
 		{
-			return this is OutputNode ?
-				$"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key}) -> {inputSource.Value}" :
-				$"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key})";
+			return $"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key})";
 		}
 
 		protected virtual void ProcessInput(Node inputSource)

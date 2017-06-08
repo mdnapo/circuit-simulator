@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Win32;
 using View.ViewModel;
 
@@ -19,11 +21,11 @@ namespace View
 			Closing += (s, e) => ViewModelLocator.Cleanup();
 		}
 
-		//private void btnOpenFile_Click(object sender, RoutedEventArgs e)
-		//{
-		//	OpenFileDialog openFileDialog = new OpenFileDialog();
-		//	if (openFileDialog.ShowDialog() == true)
-		//		view.Text = File.ReadAllText(openFileDialog.FileName);
-		//}
+		private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			SimulationVM vm = SimpleIoc.Default.GetInstance<SimulationVM>();
+			vm.RunSimulation();
+
+		}
 	}
 }

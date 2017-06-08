@@ -31,6 +31,11 @@ namespace Core.Models.V2
 			Value = Inputs.First().Value;
 		}
 
+		protected override string FormatTextOutput(Node inputSource)
+		{
+			return $"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key}) -> {inputSource.Value}";
+		}
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void OnPropertyChanged(string propertyName)
 		{

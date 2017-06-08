@@ -15,7 +15,6 @@ namespace View.ViewModel
 	{
 		public Simulator Simulator { get; set; }
 		public ICommand SelectCircuit { get; set; }
-		public ICommand RunSimulation { get; set; }
 		public string Notification { get; set; }
 
 		private FileParser parser;
@@ -28,8 +27,7 @@ namespace View.ViewModel
 			builder = new CircuitBuilderV2();
 			Simulator = new Simulator();
 			SelectCircuit = new RelayCommand(SelectCircuitExecute);
-			RunSimulation = new RelayCommand(RunSimulationExecute);
-			Notification = "Select a circuit and click Run simulation.";
+			Notification = "Select a circuit.";
 		}
 
 		private void SelectCircuitExecute()
@@ -41,10 +39,11 @@ namespace View.ViewModel
 				Simulator.Circuit = builder.GetCircuit(description);
 				Notification = $"{FormatFileName(dialog.FileName)} selected.";
 				RaisePropertyChanged("Notification");
+				RunSimulation();
 			}
 		}
 
-		private void RunSimulationExecute()
+		public void RunSimulation()
 		{
 			Simulator.Run();
             var errorNotification = Simulator.IsCircuitValid();
