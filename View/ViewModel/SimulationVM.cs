@@ -41,7 +41,9 @@ namespace View.ViewModel
 				Simulator.Circuit = builder.GetCircuit(description);
 				Notification = $"{FormatFileName(dialog.FileName)} selected.";
 				RaisePropertyChanged("Notification");
-			}
+                //Simulator.Run();
+                //RaisePropertyChanged("Simulator");
+            }
 		}
 
 		private void RunSimulationExecute()
