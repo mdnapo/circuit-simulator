@@ -6,7 +6,7 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Height="300"
-        Width="500"
+        Width="600"
         Title="Circuit Simulator"
 		ResizeMode="NoResize"
         DataContext="{Binding SimulationVM, Source={StaticResource Locator}}">
@@ -49,19 +49,21 @@
 		<TextBlock Text="{Binding Notification}" Grid.Row="1" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center"/>
 
 		<!--The circuit inputs panel-->
-		<StackPanel Grid.Column="0" Grid.Row="2">
-			<TextBlock TextAlignment="Center">Inputs</TextBlock>
-			<ItemsControl ItemsSource="{Binding Simulator.Circuit.Inputs}">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<StackPanel>
-							<TextBlock Text="{Binding Key}"/>
-							<TextBox Text="{Binding Value}"/>
-						</StackPanel>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</StackPanel>
+		<ScrollViewer Grid.Column="0" Grid.Row="2">
+			<StackPanel>
+				<TextBlock TextAlignment="Center">Inputs</TextBlock>
+				<ItemsControl ItemsSource="{Binding Simulator.Circuit.Inputs}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel>
+								<TextBlock Text="{Binding Key}"/>
+								<TextBox Text="{Binding Value}"/>
+							</StackPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</ScrollViewer>
 
 		<!--The simulation output panel-->
 		<ScrollViewer Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1">
@@ -69,18 +71,20 @@
 		</ScrollViewer>
 
 		<!--The circuit outputs-->
-		<StackPanel Grid.Column="2" Grid.Row="2">
-			<TextBlock TextAlignment="Center">Outputs</TextBlock>
-			<ItemsControl ItemsSource="{Binding Simulator.Circuit.Outputs}">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<StackPanel>
-							<TextBlock Text="{Binding Key}"/>
-							<TextBox IsEnabled="False" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
-						</StackPanel>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</StackPanel>
+		<ScrollViewer Grid.Column="2" Grid.Row="2">
+			<StackPanel>
+				<TextBlock TextAlignment="Center">Outputs</TextBlock>
+				<ItemsControl ItemsSource="{Binding Simulator.Circuit.Outputs}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel>
+								<TextBlock Text="{Binding Key}"/>
+								<TextBox IsEnabled="False" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
+							</StackPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</ScrollViewer>
 	</Grid>
 </Window>

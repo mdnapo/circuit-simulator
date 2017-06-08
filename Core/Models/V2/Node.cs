@@ -74,16 +74,16 @@ namespace Core.Models.V2
                 Processed = true;	
 		}
 
-		private string ToTextOutput(Node triggerSource)
+		private string FormatTextOutput(Node inputSource)
 		{
 			return this is OutputNode ?
-				$"({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key}) -> {triggerSource.Value}" :
-				$"({triggerSource.Key}) -> {triggerSource.Value} -> {Type} ({Key})";
+				$"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key}) -> {inputSource.Value}" :
+				$"({inputSource.Key}) -> {inputSource.Value} -> {Type} ({Key})";
 		}
 
-		protected virtual void ProcessInput(Node triggerSource)
+		protected virtual void ProcessInput(Node inputSource)
 		{
-			_output.Add(ToTextOutput(triggerSource));
+			_output.Add(FormatTextOutput(inputSource));
 			if (CanProcess())
 			{
 				Process();
