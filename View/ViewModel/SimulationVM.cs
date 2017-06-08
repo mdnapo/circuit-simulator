@@ -27,7 +27,7 @@ namespace View.ViewModel
 			builder = new CircuitBuilderV2();
 			Simulator = new Simulator();
 			SelectCircuit = new RelayCommand(SelectCircuitExecute);
-			Notification = "Select a circuit.";
+			Notification = "";
 		}
 
 		private void SelectCircuitExecute()
