@@ -9,10 +9,11 @@ namespace Core.Models.V2
 {
 	public class InputNode : Node
 	{
-		public InputNode(string key, string type, int value) : base(key, type)
+		public InputNode(string key, string type) : base(key, type)
 		{
-			Value = value;
-		}
+			
+            Value = 1;
+        }
 
 		public override void Process()
 		{

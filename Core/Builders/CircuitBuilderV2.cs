@@ -20,7 +20,20 @@ namespace Core.Builders
             _circuit = new Circuit();
             _nodes = new Dictionary<string, Node>();
             _nodeFactory = new NodeFactoryV2();
+            AddNodesToBuilder();
 		}
+
+        private void AddNodesToBuilder()
+        {
+            _nodeFactory.AddNodeType("or", typeof(OrNode));
+            _nodeFactory.AddNodeType("and", typeof(AndNode));
+            _nodeFactory.AddNodeType("input_low", typeof(InputNode));
+            _nodeFactory.AddNodeType("input_high", typeof(InputNode));
+            _nodeFactory.AddNodeType("probe", typeof(OutputNode));
+            _nodeFactory.AddNodeType("xor", typeof(XorNode));
+            _nodeFactory.AddNodeType("nand", typeof(NandNode));
+            _nodeFactory.AddNodeType("not", typeof(NotNode));
+        }
 
 		public void AddNode(string key, string type)
 		{
@@ -29,6 +42,7 @@ namespace Core.Builders
 
 			if (type == "INPUT_LOW" || type == "INPUT_HIGH")
 			{
+                node.Value = type == "INPUT_LOW" ? 0 : 1;
 				_circuit.Inputs.Add((InputNode)node);
 			}
 			else if (type == "PROBE")
